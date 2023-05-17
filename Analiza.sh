@@ -9,7 +9,7 @@ if [ -d "$dirname" ]; then
 fi
 
 mkdir "$dirname"
-cd "$dirname"
+cd "$dirname" || exit
 
 wget -w 5 "$url"
 
