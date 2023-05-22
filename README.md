@@ -24,3 +24,26 @@ Following standard GNU/Linux utilities should be installed on the system:
         <td> - wget </td>
     </tr>
 </table>
+
+## > How to
+
+Use case for magazine Analiza:
+
+1.) Clone the project with:
+```
+git clone https://github.com/aljazmc/dlib-si-scripts
+```
+2.) Move into the project with:
+```
+cd dlib-si-scripts
+```
+3.) Make a script (for example: Analiza) executable with:
+```
+chmod +x Analiza.sh
+```
+4.) Afterwards run the script like this:
+```
+./Analiza.sh
+```
+
+This command will create a target directory 'Analiza' for downloads, and after a short time (or a few days, if we are talking about long running periodicals with thousands of files) a complete collection of periodical (in both .pdf and .txt format) will be downloaded in the target directory.
