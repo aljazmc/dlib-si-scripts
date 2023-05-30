@@ -12,3 +12,5 @@ mkdir "$dirname"
 cd "$dirname"
 
 wget -w 5 "$url"{1..2}
+
+cat index* > htmldump
