@@ -31,3 +31,6 @@ cat htmldump \
   | awk 'length == 73' \
   | sed '/TEXT/!d' \
   | sed 's/^/https\:\/\/www.dlib.si/g' > textlist
+
+head -1 textlist > textstodownload
+cat textlist >> textstodownload
