@@ -25,3 +25,13 @@ cat htmldump \
 head -1 pdflist > pdfstodownload
 cat pdflist >> pdfstodownload
 
+cat htmldump \
+  | sed 's/\/TEXT/\/TEXT\n/' \
+  | sed 's/\/stream/\n\/stream/g' \
+  | awk 'length == 73' \
+  | sed '/TEXT/!d' \
+  | sed 's/^/https\:\/\/www.dlib.si/g' > textlist
+
+head -1 textlist > textstodownload
+cat textlist >> textstodownload
+
