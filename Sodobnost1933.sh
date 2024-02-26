@@ -18,3 +18,10 @@ done
 
 cat {1..11} > htmldump
 
+cat htmldump \
+  | sed 's/\/PDF/\/PDF\n/' \
+  | sed 's/\/stream/\n\/stream/g' \
+  | awk 'length == 72' \
+  | sed '/PDF/!d' \
+  | sed 's/^/https\:\/\/www.dlib.si/g' > pdflist
+
