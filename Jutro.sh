@@ -16,3 +16,5 @@ do
   wget -w 5 -O "$i" "$url""$i"
 done
 
+cat {1..91} > htmldump
+
