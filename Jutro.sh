@@ -35,3 +35,6 @@ cat htmldump \
   | sed '/TEXT/!d' \
   | sed 's/^/https\:\/\/www.dlib.si/g' > textlist
 
+head -1 textlist > textstodownload
+cat textlist >> textstodownload
+
