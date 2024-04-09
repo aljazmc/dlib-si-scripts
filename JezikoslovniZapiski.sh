@@ -22,3 +22,6 @@ cat htmldump \
   | sed '/PDF/!d' \
   | sed 's/^/https\:\/\/www.dlib.si/g' > pdflist
 
+head -1 pdflist > pdfstodownload
+cat pdflist >> pdfstodownload
+
