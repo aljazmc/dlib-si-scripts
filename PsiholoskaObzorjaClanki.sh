@@ -8,3 +8,6 @@ if [ -d "$dirname" ]; then
   exit
 fi
 
+mkdir "$dirname"
+cd "$dirname"
+
