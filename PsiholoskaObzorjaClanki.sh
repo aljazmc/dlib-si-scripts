@@ -13,3 +13,5 @@ cd "$dirname"
 
 wget -w 5 "$url"{1..9}
 
+cat index* > htmldump
+
