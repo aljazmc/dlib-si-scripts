@@ -11,3 +11,8 @@ fi
 mkdir "$dirname"
 cd "$dirname"
 
+for i in {1..43}
+do
+  wget -w 5 -O "$i" "$url""$i"
+done
+
