@@ -15,8 +15,7 @@ wget -w 5 "$url"
 
 cat index* > htmldump
 
-cat htmldump \
-  | sed 's/\/PDF/\/PDF\n/' \
+sed 's/\/PDF/\/PDF\n/' htmldump \
   | sed 's/\/stream/\n\/stream/g' \
   | awk 'length == 72' \
   | sed '/PDF/!d' \
