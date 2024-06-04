@@ -33,10 +33,10 @@ sed 's/\/TEXT/\/TEXT\n/' htmldump \
 head -1 textlist > textstodownload
 cat textlist >> textstodownload
 
-cat pdfstodownload | xargs wget -w 4
+wget -w 4 -i pdfstodownload
 find . -type f -name "PDF*" -print0 | xargs -0I {} sh -c 'mv "{}" "{}".pdf'
 
-cat textstodownload | xargs wget -w 2
+wget -w 2 -i textstodownload
 find . -type f -name "TEXT*" -print0 | xargs -0I {} sh -c 'mv "{}" "{}".txt'
 
 rm index* htmldump pdflist pdfstodownload PDF.pdf textlist textstodownload TEXT.txt
