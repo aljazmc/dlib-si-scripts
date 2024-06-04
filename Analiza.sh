@@ -36,7 +36,7 @@ cat textlist >> textstodownload
 wget -w 4 -i pdfstodownload
 find . -type f -name "PDF*" -print0 | xargs -0I {} sh -c 'mv "{}" "{}".pdf'
 
-cat textstodownload | xargs wget -w 2
+wget -w 2 -i textstodownload
 find . -type f -name "TEXT*" -print0 | xargs -0I {} sh -c 'mv "{}" "{}".txt'
 
 rm index* htmldump pdflist pdfstodownload PDF.pdf textlist textstodownload TEXT.txt
