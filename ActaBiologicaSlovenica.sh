@@ -11,9 +11,7 @@ fi
 mkdir "$dirname"
 cd "$dirname"
 
-wget -w 5 "$url"
-
-cat index* > htmldump
+wget -O htmldump "$url"
 
 cat htmldump \
   | sed 's/\/PDF/\/PDF\n/' \
