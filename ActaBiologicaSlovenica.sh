@@ -8,8 +8,7 @@ cd "$dirname"
 
 wget -O htmldump "$url"
 
-cat htmldump \
-  | sed 's/\/PDF/\/PDF\n/' \
+sed 's/\/PDF/\/PDF\n/'i htmldump \
   | sed 's/\/stream/\n\/stream/g' \
   | awk 'length == 72' \
   | sed '/PDF/!d' \
@@ -18,8 +17,7 @@ cat htmldump \
 head -1 pdflist > pdfstodownload
 cat pdflist >> pdfstodownload
 
-cat htmldump \
-  | sed 's/\/TEXT/\/TEXT\n/' \
+sed 's/\/TEXT/\/TEXT\n/' htmldump \
   | sed 's/\/stream/\n\/stream/g' \
   | awk 'length == 73' \
   | sed '/TEXT/!d' \
