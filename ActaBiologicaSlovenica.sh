@@ -30,10 +30,10 @@ cat textlist >> textstodownload
 
 mkdir -p "$abspath"
 
-wget -w 2 -i pdfstodownload
-find . -type f -name "PDF*" -print0 | xargs -0I {} sh -c 'mv "{}" "{}".pdf'
+wget -w 2 -i pdfstodownload && rm PDF
+find . -type f -name "PDF*" -print0 | xargs -0I {} sh -c "mv \"{}\" \"$abspath{}\".pdf"
 
-wget -w 2 -i textstodownload
-find . -type f -name "TEXT*" -print0 | xargs -0I {} sh -c 'mv "{}" "{}".txt'
+wget -w 2 -i textstodownload && rm TEXT
+find . -type f -name "TEXT*" -print0 | xargs -0I {} sh -c "mv \"{}\" \"$abspath{}\".txt"
 
 rm index* htmldump pdflist pdfstodownload PDF.pdf textlist textstodownload TEXT.txt
