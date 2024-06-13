@@ -2,6 +2,7 @@
 
 dirname="Acta Geographica Slovenica"
 abspath="$(cd "$(dirname "$dirname")" && pwd -P)/$(basename "$dirname")/"
+tempdir=$(mktemp -d)
 url="https://www.dlib.si/results/?=&query=%27rele%253dActa%2bgeographica%2bSlovenica%27&fformattypeserial=journal&sortDir=ASC&sort=date&pageSize=100"
 
 mkdir "$dirname"
