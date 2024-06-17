@@ -5,8 +5,8 @@ abspath="$(cd "$(dirname "$dirname")" && pwd -P)/$(basename "$dirname")/"
 tempdir=$(mktemp -d)
 url="https://www.dlib.si/results/?=&query=%27rele%253dActa%2bgeotechnica%2bSlovenica%27&fformattypeserial=journal&sortDir=ASC&sort=date&pageSize=100"
 
-mkdir "$dirname"
-cd "$dirname"
+cd "$tempdir" || exit
+trap 'rm -rf -- "$tempdir"' EXIT
 
 wget -O htmldump "$url"
 
@@ -28,10 +28,10 @@ sed 's/\/TEXT/\/TEXT\n/' htmldump \
 head -1 textlist > textstodownload
 cat textlist >> textstodownload
 
-wget -w 2 -i podfstodownload && rm PDF
-find . -type f -name "PDF*" -print0 | xargs -0I {} sh -c 'mv "{}" "{}".pdf'
+mkdir -p "$abspath"
+
+wget -w 2 -i pdfstodownload && rm PDF
+find . -type f -name "PDF*" -print0 | xargs -0I {} sh -c "mv \"{}\" \"$abspath{}\".pdf"
 
 wget -w 2 -i textstodownload && rm TEXT
-find . -type f -name "TEXT*" -print0 | xargs -0I {} sh -c 'mv "{}" "{}".txt'
-
-rm index* htmldump pdflist pdfstodownload PDF.pdf textlist textstodownload TEXT.txt
+find . -type f -name "TEXT*" -print0 | xargs -0I {} sh -c "mv \"{}\" \"$abspath{}\".txt"
