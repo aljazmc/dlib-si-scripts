@@ -1,6 +1,7 @@
 #!/bin/bash
 
 dirname="Acta Geotechnica Slovenica"
+abspath="$(cd "$(dirname "$dirname")" && pwd -P)/$(basename "$dirname")/"
 url="https://www.dlib.si/results/?=&query=%27rele%253dActa%2bgeotechnica%2bSlovenica%27&fformattypeserial=journal&sortDir=ASC&sort=date&pageSize=100"
 
 if [ -d "$dirname" ]; then
