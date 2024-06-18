@@ -6,9 +6,7 @@ url="https://www.dlib.si/results/?=&query=%27rele%253dActa%2bHistriae%27&fformat
 mkdir "$dirname"
 cd "$dirname"
 
-wget -w 5 "$url"
-
-cat index* > htmldump
+wget -O htmldump "$url"
 
 cat htmldump \
   | sed 's/\/PDF/\/PDF\n/' \
