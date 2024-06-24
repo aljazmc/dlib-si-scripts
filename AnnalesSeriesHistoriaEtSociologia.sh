@@ -35,4 +35,3 @@ find . -type f -name "PDF*" -print0 | xargs -0I {} sh -c "mv \"{}\" \"$abspath{}
 
 wget -w 2 -i textstodownload && rm TEXT
 find . -type f -name "TEXT*" -print0 | xargs -0I {} sh -c "mv \"{}\" \"$abspath{}\".txt"
-
