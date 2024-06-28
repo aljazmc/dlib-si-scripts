@@ -8,9 +8,7 @@ url="https://www.dlib.si/results/?=&query=%27rele%253dAS.%2bAndrago%25c5%25a1ka%
 cd "$tempdir" || exit
 trap 'rm -rf -- "$tempdir"' EXIT
 
-wget -w 5 "$url"
-
-cat index* > htmldump
+wget -O htmldump "$url"
 
 cat htmldump \
   | sed 's/\/PDF/\/PDF\n/' \
