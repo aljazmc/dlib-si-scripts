@@ -5,8 +5,8 @@ abspath="$(cd "$(dirname "$dirname")" && pwd -P)/$(basename "$dirname")/"
 tempdir=$(mktemp -d)
 url="https://www.dlib.si/results/?=&query=%27rele%253dAS.%2bAndrago%25c5%25a1ka%2bspoznanja%27&pageSize=100&fformattypeserial=journal&sortDir=ASC&sort=date"
 
-mkdir "$dirname"
-cd "$dirname"
+cd "$tempdir" || exit
+trap 'rm -rf -- "$tempdir"' EXIT
 
 wget -w 5 "$url"
 
