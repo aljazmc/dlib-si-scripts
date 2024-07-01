@@ -30,7 +30,7 @@ cat textlist >> textstodownload
 
 mkdir -p "$abspath"
 
-cat pdfstodownload | xargs wget -w 4
+wget -w 2 -i pdfstodownload && rm PDF
 find . -type f -name "PDF*" -print0 | xargs -0I {} sh -c 'mv "{}" "{}".pdf'
 
 cat textstodownload | xargs wget -w 2
