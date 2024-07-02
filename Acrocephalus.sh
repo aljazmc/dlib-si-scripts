@@ -8,7 +8,7 @@ url="https://www.dlib.si/results/?=&query=%27rele%253dAcrocephalus%27&fformattyp
 cd "$tempdir" || exit
 trap 'rm -rf -- "$tempdir"' EXIT
 
-wget -w 5 "$url"{1..2}
+wget -w 1 "$url"{1..2}
 
 cat index* > htmldump
 
