@@ -1,6 +1,7 @@
 #!/bin/bash
 
 dirname="Acrocephalus"
+abspath="$(cd "$(dirname "$dirname")" && pwd -P)/$(basename "$dirname")/"
 url="https://www.dlib.si/results/?=&query=%27rele%253dAcrocephalus%27&fformattypeserial=journal&sortDir=ASC&sort=date&pageSize=100&page="
 
 if [ -d "$dirname" ]; then
