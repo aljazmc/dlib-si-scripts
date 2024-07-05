@@ -30,6 +30,8 @@ sed 's/\/TEXT/\/TEXT\n/' htmldump \
 head -1 textlist > textstodownload
 cat textlist >> textstodownload
 
+mkdir -p "$abspath"
+
 wget -w 2 -i pdfstodownload && rm PDF
 find . -type f -name "PDF*" -print0 | xargs -0I {} sh -c "mv \"{}\" \"$abspath{}\".pdf"
 
