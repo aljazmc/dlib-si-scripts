@@ -1,0 +1,11 @@
+*.pdf
+*.txt
+
+index.*
+htmldump
+
+pdflist
+pdfstodownload
+
+textlist
+textstodownload
