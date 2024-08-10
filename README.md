@@ -23,7 +23,7 @@ Following standard GNU/Linux utilities should be installed on the system:
 ```
 git clone https://github.com/aljazmc/dlib-si-scripts
 ```
-2.) Move into project with:
+2.) Move into the project with:
 ```
 cd dlib-si-scripts
 ```
@@ -31,11 +31,11 @@ cd dlib-si-scripts
 ```
 chmod +x Analiza.sh
 ```
-4.) Afterwards run a script like this:
+4.) Afterwards run the script like this:
 ```
 ./Analiza.sh
 ```
 
-This command will create a target directory 'Analiza' for downloads, and after a short time (or a few days, if we are talking about long running periodicals with thousands of files) a complete collection of periodical (in both .pdf and .txt format) will be downloaded in the target directory of each script.
+This command will create a target directory 'Analiza' for downloads, and after a short time (or a few days, if we are talking about long running periodicals with thousands of files) a complete collection of periodical (in both .pdf and .txt format) will be downloaded in the target directory.
 
 ## > LICENSE: [MIT](https://github.com/aljazmc/dlib-si-scripts/blob/main/LICENSE)
