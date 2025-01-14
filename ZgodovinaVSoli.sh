@@ -1,22 +1,16 @@
 #!/bin/bash
 
 dirname="Zgodovina v Soli"
+abspath="$(cd "$(dirname "$dirname")" && pwd -P)/$(basename "$dirname")/"
+tempdir=$(mktemp -d)
 url="https://www.dlib.si/results/?=&query=%27rele%253dZgodovina%2bv%2b%25c5%25a1oli%27&pageSize=100&fformattypeserial=journal&sortDir=ASC&sort=date"
 
-if [ -d "$dirname" ]; then
-  echo "Directory \"$dirname\" with downloads already exists. If you want to download periodical again, remove that directory and start the script again."
-  exit
-fi
+cd "$tempdir" || exit
+trap 'rm -rf -- "$tempdir"' EXIT
 
-mkdir "$dirname"
-cd "$dirname"
+wget -O htmldump "$url"
 
-wget -w 5 "$url"
-
-cat index* > htmldump
-
-cat htmldump \
-  | sed 's/\/PDF/\/PDF\n/' \
+sed 's/\/PDF/\/PDF\n/' htmldump \
   | sed 's/\/stream/\n\/stream/g' \
   | awk 'length == 72' \
   | sed '/PDF/!d' \
@@ -25,8 +19,7 @@ cat htmldump \
 head -1 pdflist > pdfstodownload
 cat pdflist >> pdfstodownload
 
-cat htmldump \
-  | sed 's/\/TEXT/\/TEXT\n/' \
+sed 's/\/TEXT/\/TEXT\n/' htmldump \
   | sed 's/\/stream/\n\/stream/g' \
   | awk 'length == 73' \
   | sed '/TEXT/!d' \
@@ -35,10 +28,10 @@ cat htmldump \
 head -1 textlist > textstodownload
 cat textlist >> textstodownload
 
-cat pdfstodownload | xargs wget -w 4
-find . -type f -name "PDF*" -print0 | xargs -0I {} sh -c 'mv "{}" "{}".pdf'
+mkdir -p "$abspath"
 
-cat textstodownload | xargs wget -w 2
-find . -type f -name "TEXT*" -print0 | xargs -0I {} sh -c 'mv "{}" "{}".txt'
+wget -w 2 -i pdfstodownload && rm PDF
+find . -type f -name "PDF*" -print0 | xargs -0I {} sh -c "mv \"{}\" \"$abspath{}\".pdf"
 
-rm index* htmldump pdflist pdfstodownload PDF.pdf textlist textstodownload TEXT.txt
+wget -w 2 -i textstodownload && rm TEXT
+find . -type f -name "TEXT*" -print0 | xargs -0I {} sh -c "mv \"{}\" \"$abspath{}\".txt"
