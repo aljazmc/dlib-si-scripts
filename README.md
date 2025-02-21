@@ -222,7 +222,7 @@ Command `./Analiza.sh` will create a target directory 'Analiza' for downloads, a
         <td>Uprava</td>
     </tr>
     <tr>
-        <td>Uradni list Ljudske republike Slovenije</td>
+        <td>Uradni list Ljudske Republike Slovenije</td>
         <td>Uradni list Socialisticne Republike Slovenije</td>
         <td>Uradni vestnik Mestne obcine Ptuj</td>
         <td>Varstvo Narave</td>
