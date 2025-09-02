@@ -3,7 +3,7 @@
 dirname="Annales Series Historia et Sociologia"
 abspath="$(cd "$(dirname "$dirname")" && pwd -P)/$(basename "$dirname")/"
 tempdir=$(mktemp -d)
-url="https://www.dlib.si/results/?=&query=%27rele%253dAnaliza%2b(Ljubljana)%27&fformattypeserial=journal&sortDir=ASC&sort=date&pageSize=100"
+url="https://www.dlib.si/results/?query=%27rele%253dAnnales.%2bSeries%2bhistoria%2bet%2bsociologia%27&fformattypeserial=journal&sortDir=ASC&sort=date&pageSize=100"
 
 cd "$tempdir" || exit
 trap 'rm -rf -- "$tempdir"' EXIT
