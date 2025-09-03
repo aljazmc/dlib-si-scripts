@@ -1,14 +1,17 @@
 #!/bin/bash
 
 dirname="Anthropos"
-abspath="$(cd "$(dirname "$dirname")" && pwd -P)/$(basename "$dirname")/"
-tempdir=$(mktemp -d)
 url="https://www.dlib.si/results/?=&query=%27rele%253dAnthropos%2b(Ljubljana)%27&pageSize=100&fformattypeserial=journal&sortDir=ASC&sort=date&page="
 
-cd "$tempdir" || exit
-trap 'rm -rf -- "$tempdir"' EXIT
+if [ -d "$dirname" ]; then
+  echo "Directory \"$dirname\" with downloads already exists. If you want to download periodical again, remove that directory and start the script again."
+  exit
+fi
 
-wget -w 1 "$url"{1..2}
+mkdir "$dirname"
+cd "$dirname" || exit
+
+wget --max-redirect=3 -w 1 "$url"{1..2}
 
 cat index* > htmldump
 
@@ -30,10 +33,11 @@ sed 's/\/TEXT/\/TEXT\n/' htmldump \
 head -1 textlist > textstodownload
 cat textlist >> textstodownload
 
-mkdir -p "$abspath"
+cat pdfstodownload | xargs wget --max-redirect=3 -w 4
+find . -type f -name "PDF*" -print0 | xargs -0I {} sh -c 'mv "{}" "{}".pdf'
 
-wget -w 2 -i pdfstodownload && rm PDF
-find . -type f -name "PDF*" -print0 | xargs -0I {} sh -c "mv \"{}\" \"$abspath{}\".pdf"
+cat textstodownload | xargs wget --max-redirect=3 -w 2
+find . -type f -name "TEXT*" -print0 | xargs -0I {} sh -c 'mv "{}" "{}".txt'
 
-wget -w 2 -i textstodownload && rm TEXT
-find . -type f -name "TEXT*" -print0 | xargs -0I {} sh -c "mv \"{}\" \"$abspath{}\".txt"
+rm *[0-9] htmldump pdflist pdfstodownload PDF.pdf textlist textstodownload TEXT.txt
+
