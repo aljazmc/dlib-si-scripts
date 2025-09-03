@@ -13,7 +13,7 @@ cd "$dirname"
 
 for i in {1..26}
 do
-  wget -w 5 -O "$i" "$url""$i"
+  wget --max-redirect=3 -w 5 -O "$i" "$url""$i"
 done
 
 cat {1..26} > htmldump
@@ -38,10 +38,10 @@ cat htmldump \
 head -1 textlist > textstodownload
 cat textlist >> textstodownload
 
-cat pdfstodownload | xargs wget -w 4
+cat pdfstodownload | xargs wget --max-redirect=3 -w 4
 find . -type f -name "PDF*" -print0 | xargs -0I {} sh -c 'mv "{}" "{}".pdf'
 
-cat textstodownload | xargs wget -w 2
+cat textstodownload | xargs wget --max-redirect=3 -w 2
 find . -type f -name "TEXT*" -print0 | xargs -0I {} sh -c 'mv "{}" "{}".txt'
 
 rm *[0-9] htmldump pdflist pdfstodownload PDF.pdf textlist textstodownload TEXT.txt
