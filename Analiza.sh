@@ -13,17 +13,23 @@ cd "$dirname" || exit
 
 wget --load-cookies ../cookies.txt -w 7 -O htmldump "$url" || exit
 
+################## Extract pdf download links #################################
+
 sed 's/\/PDF/\/PDF\n/' htmldump \
   | sed 's/\/stream/\n\/stream/g' \
   | awk 'length == 72' \
   | sed '/PDF/!d' \
   | sed 's/^/https\:\/\/www.dlib.si/g' > pdflist
 
+################## Extract txt download links #################################
+
 sed 's/\/TEXT/\/TEXT\n/' htmldump \
   | sed 's/\/stream/\n\/stream/g' \
   | awk 'length == 73' \
   | sed '/TEXT/!d' \
   | sed 's/^/https\:\/\/www.dlib.si/g' > textlist
+
+#################### create pdf downloader and run it #########################
 
 PDFSEXPECTED=$(wc -l < pdflist)
 
@@ -54,6 +60,8 @@ paste -d ' ' pdffilenamer pdfslist >> pdfrunner
 
 ./pdfrunner
 
+##################### create txt downloader and run it ########################
+
 TEXTSEXPECTED=$(wc -l < textlist)
 
 for (( COUNTER=1; COUNTER<="$TEXTSEXPECTED"; COUNTER+=1 ));
@@ -83,12 +91,18 @@ paste -d ' ' textfilenamer textslist >> textrunner
 
 ./textrunner
 
+######################## find and remove wrong downloads ######################
+
 find . -type f -size -58k -size +55k -delete
 find . -type f -empty -delete
+
+################################# report ######################################
 
 echo "$(( PDFSEXPECTED-$(find PDF* -maxdepth 1 -name "PDF*"| wc -l) )) pdfs are missing."
 echo "$(( TEXTSEXPECTED-$(find TEXT* -maxdepth 1 -name "TEXT*"| wc -l) )) texts are missing."
 echo "If some files are missing, run the script again"
+
+################################ cleanup ######################################
 
 rm pdf*
 rm text*
