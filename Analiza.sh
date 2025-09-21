@@ -93,7 +93,7 @@ paste -d ' ' textfilenamer textslist >> textrunner
 
 ######################## find and remove wrong downloads ######################
 
-find . -type f -size -58k -size +55k -delete
+find . -type f -exec grep -q 'DOCTYPE html' '{}' \; -delete;
 find . -type f -empty -delete
 
 ################################# report ######################################
@@ -106,5 +106,3 @@ echo "If some files are missing, run the script again"
 
 rm pdf*
 rm text*
-
-rm htmldump
