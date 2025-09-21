@@ -3,15 +3,10 @@
 dirname="Analiza"
 url="https://www.dlib.si/results/?=&query=%27rele%253dAnaliza%2b(Ljubljana)%27&fformattypeserial=journal&sortDir=ASC&sort=date&pageSize=100"
 
-if [ -d "$dirname" ]; then
-  echo "Directory \"$dirname\" with downloads already exists. If you want to download periodical again, remove that directory and start the script again."
-  exit
-fi
-
-mkdir "$dirname"
+mkdir -p "$dirname"
 cd "$dirname" || exit
 
-wget --max-redirect=3 -O htmldump "$url"
+wget --load-cookies ../cookies.txt -w 7 -O htmldump "$url" || exit
 
 sed 's/\/PDF/\/PDF\n/' htmldump \
   | sed 's/\/stream/\n\/stream/g' \
@@ -19,23 +14,78 @@ sed 's/\/PDF/\/PDF\n/' htmldump \
   | sed '/PDF/!d' \
   | sed 's/^/https\:\/\/www.dlib.si/g' > pdflist
 
-head -1 pdflist > pdfstodownload
-cat pdflist >> pdfstodownload
-
 sed 's/\/TEXT/\/TEXT\n/' htmldump \
   | sed 's/\/stream/\n\/stream/g' \
   | awk 'length == 73' \
   | sed '/TEXT/!d' \
   | sed 's/^/https\:\/\/www.dlib.si/g' > textlist
 
-head -1 textlist > textstodownload
-cat textlist >> textstodownload
+PDFSEXPECTED=$(wc -l < pdflist)
 
-cat pdfstodownload | xargs wget --max-redirect=3 -w 4
-find . -type f -name "PDF*" -print0 | xargs -0I {} sh -c 'mv "{}" "{}".pdf'
+for (( COUNTER=1; COUNTER<="$PDFSEXPECTED"; COUNTER+=1 ));
+do
+  echo "PDF.$COUNTER.pdf" >> pdfsexpected
+done
 
-cat textstodownload | xargs wget --max-redirect=3 -w 2
-find . -type f -name "TEXT*" -print0 | xargs -0I {} sh -c 'mv "{}" "{}".txt'
+sort > pdfsexpectedsorted < pdfsexpected
 
-rm htmldump pdflist pdfstodownload PDF.pdf textlist textstodownload TEXT.txt
+find PDF* -maxdepth 1 -name "PDF*" \
+  | sort > pdfsdownloadedsorted
 
+comm pdfsdownloadedsorted  pdfsexpectedsorted -3 \
+  | sed 's/[PDF\.,\.pdf]//g' \
+  | tr -d '[:blank:]' > pdflinkstodownload
+
+sed -e "s/^/\`sed '/g" \
+  -e "s/$/\!d\' pdflist\`/g" > pdfslist < pdflinkstodownload
+
+sed 's/^/wget -w 5 --load-cookies ..\/cookies.txt -O PDF./g;s/$/.pdf/g' > pdffilenamer < pdflinkstodownload
+
+echo "#!/bin/bash" > pdfrunner
+
+chmod +x pdfrunner
+
+paste -d ' ' pdffilenamer pdfslist >> pdfrunner
+
+./pdfrunner
+
+TEXTSEXPECTED=$(wc -l < textlist)
+
+for (( COUNTER=1; COUNTER<="$TEXTSEXPECTED"; COUNTER+=1 ));
+do
+  echo "TEXT.$COUNTER.txt" >> textsexpected
+done
+
+sort > textsexpectedsorted < textsexpected
+
+find TEXT* -maxdepth 1 -name "TEXT*" \
+  | sort > textsdownloadedsorted
+
+comm textsdownloadedsorted  textsexpectedsorted -3 \
+  | sed 's/[TEXT\.,\.txt]//g' \
+  | tr -d '[:blank:]' > textlinkstodownload
+
+sed -e "s/^/\`sed '/g" \
+  -e "s/$/\!d\' textlist\`/g" > textslist < textlinkstodownload
+
+sed 's/^/wget -w 5 --load-cookies ..\/cookies.txt -O TEXT./g;s/$/.txt/g' > textfilenamer < textlinkstodownload
+
+echo "#!/bin/bash" > textrunner
+
+chmod +x textrunner
+
+paste -d ' ' textfilenamer textslist >> textrunner
+
+./textrunner
+
+find . -type f -size -58k -size +55k -delete
+find . -type f -empty -delete
+
+echo "$(( PDFSEXPECTED-$(find PDF* -maxdepth 1 -name "PDF*"| wc -l) )) pdfs are missing."
+echo "$(( TEXTSEXPECTED-$(find TEXT* -maxdepth 1 -name "TEXT*"| wc -l) )) texts are missing."
+echo "If some files are missing, run the script again"
+
+rm pdf*
+rm text*
+
+rm htmldump
