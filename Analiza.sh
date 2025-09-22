@@ -21,6 +21,10 @@ sed 's/\/PDF/\/PDF\n/' htmldump \
   | sed '/PDF/!d' \
   | sed 's/^/https\:\/\/www.dlib.si/g' > pdflist
 
+[ ! -s pdflist ] \
+  && echo "PDF download links weren't extracted successfully. Exiting..." \
+  && exit
+
 ################## Extract txt download links #################################
 
 sed 's/\/TEXT/\/TEXT\n/' htmldump \
@@ -28,6 +32,10 @@ sed 's/\/TEXT/\/TEXT\n/' htmldump \
   | awk 'length == 73' \
   | sed '/TEXT/!d' \
   | sed 's/^/https\:\/\/www.dlib.si/g' > textlist
+
+[ ! -s textlist ] \
+  && echo "TXT download links weren't extracted successfully. Exiting..." \
+  && exit
 
 #################### create pdf downloader and run it #########################
 
