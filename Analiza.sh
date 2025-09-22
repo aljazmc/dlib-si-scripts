@@ -13,6 +13,15 @@ cd "$dirname" || exit
 
 wget --load-cookies ../cookies.txt -w 7 -O htmldump "$url"
 
+HTMLDUMP=$(cat htmldump)
+
+if [[ $HTMLDUMP == *"NAPAKA"* ]]; then
+  echo "" \
+  && echo "There were some problems with downloading files from dlib.si. Please, try again after a few moments." \
+  && rm htmldump \
+  && exit
+fi
+
 ################## Extract pdf download links #################################
 
 sed 's/\/PDF/\/PDF\n/' htmldump \
