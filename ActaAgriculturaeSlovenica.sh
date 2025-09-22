@@ -11,7 +11,7 @@ fi
 mkdir -p "$dirname"
 cd "$dirname" || exit
 
-wget --load-cookies ../cookies.txt -w 7 -O htmldump "$url" || exit
+wget --load-cookies ../cookies.txt -w 7 -O htmldump "$url"
 
 ################## Extract pdf download links #################################
 
