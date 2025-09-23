@@ -123,5 +123,4 @@ echo "If some files are missing, run the script again"
 
 rm pdf*
 rm text*
-rm htmldump pdflist pdfstodownload PDF.pdf textlist textstodownload TEXT.txt
 
