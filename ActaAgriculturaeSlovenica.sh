@@ -4,7 +4,7 @@ dirname="Acta Agriculturae Slovenica"
 url="https://www.dlib.si/results/?=&query=%27rele%253dActa%2bagriculturae%2bSlovenica%27&pageSize=100&fformattypeserial=journal&sortDir=ASC&sort=date"
 
 if [ ! -f "cookies.txt" ]; then
-  echo "Please extract the 'cookies.txt' from www.dlib.si with the appropriate plugin for your web browser. Save 'cookies.txt' in the same directory as $dirname.sh"
+  echo "Please extract the 'cookies.txt' from www.dlib.si with the appropriate plugin for your web browser. Save 'cookies.txt' in the same directory as ActaAgriculturaeSlovenica.sh"
   exit
 fi
 
