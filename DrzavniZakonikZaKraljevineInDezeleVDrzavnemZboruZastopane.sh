@@ -1,6 +1,7 @@
 #!/bin/bash
 
 dirname="Drzavni Zakonik za Kraljevine in Dezele v Drzavnem Zboru Zastopane"
+scriptname=$(echo $dirname | tr -d ' ')
 url="https://www.dlib.si/results/?=&query=%27rele%253dDr%25c5%25beavni%2bzakonik%2bza%2bkraljevine%2bin%2bde%25c5%25beele%2bv%2bdr%25c5%25beavnem%2bzboru%2bzastopane%27&pageSize=100&sortDir=ASC&sort=date&page="
 
 if [ -d "$dirname" ]; then

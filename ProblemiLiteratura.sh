@@ -1,6 +1,7 @@
 #!/bin/bash
 
 dirname="Problemi Literatura"
+scriptname=$(echo $dirname | tr -d ' ')
 url="https://www.dlib.si/results/?=&query=%27rele%253dProblemi.%2bLiteratura%27&pageSize=100&sortDir=ASC&sort=date"
 
 if [ -d "$dirname" ]; then

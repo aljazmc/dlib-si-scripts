@@ -1,6 +1,7 @@
 #!/bin/bash
 
 dirname="Managing Global Transitions"
+scriptname=$(echo $dirname | tr -d ' ')
 url="https://www.dlib.si/results/?=&query=%27rele%253dManaging%2bglobal%2btransitions%27&pageSize=100&fformattypeserial=journal&sortDir=ASC&sort=date"
 
 if [ -d "$dirname" ]; then

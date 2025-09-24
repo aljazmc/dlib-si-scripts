@@ -1,6 +1,7 @@
 #!/bin/bash
 
 dirname="Gospodarska Gibanja"
+scriptname=$(echo $dirname | tr -d ' ')
 url="https://www.dlib.si/results/?=&query=%27rele%253dGospodarska%2bgibanja%27&pageSize=100&fformattypeserial=journal&sortDir=ASC&sort=date"
 
 if [ -d "$dirname" ]; then

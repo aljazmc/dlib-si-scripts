@@ -1,6 +1,7 @@
 #!/bin/bash
 
 dirname="Slovenski Tednik"
+scriptname=$(echo $dirname | tr -d ' ')
 url="https://www.dlib.si/results/?=&query=%27rele%253dSlovenski%2btednik%2b(Buenos%2bAires)%27&sortDir=ASC&sort=date&pageSize=100&page="
 
 if [ -d "$dirname" ]; then

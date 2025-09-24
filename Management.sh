@@ -1,6 +1,7 @@
 #!/bin/bash
 
 dirname="Management"
+scriptname=$(echo $dirname | tr -d ' ')
 url="https://www.dlib.si/results/?query=%27rele%253dManagement%27&pageSize=100&fformattypeserial=journal&sortDir=ASC&sort=date&frelation=Management"
 
 if [ -d "$dirname" ]; then
