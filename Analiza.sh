@@ -1,10 +1,11 @@
 #!/bin/bash
 
 dirname="Analiza"
+scriptname=$(echo $dirname | tr -d ' ')
 url="https://www.dlib.si/results/?=&query=%27rele%253dAnaliza%2b(Ljubljana)%27&fformattypeserial=journal&sortDir=ASC&sort=date&pageSize=100"
 
 if [ ! -f "cookies.txt" ]; then
-  echo "Please extract the 'cookies.txt' from www.dlib.si with the appropriate plugin for your web browser. Save 'cookies.txt' in the same directory as $dirname.sh"
+  echo "Please extract the 'cookies.txt' from www.dlib.si with the appropriate plugin for your web browser. Save 'cookies.txt' in the same directory as $scriptname.sh"
   exit
 fi
 
