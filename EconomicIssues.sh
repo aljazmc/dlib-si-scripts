@@ -1,6 +1,7 @@
 #!/bin/bash
 
 dirname="Economic Issues"
+scriptname=$(echo $dirname | tr -d ' ')
 url="https://www.dlib.si/results/?=&query=%27rele%253dEconomic%2bissues%27&sortDir=ASC&sort=date&pageSize=100"
 
 if [ -d "$dirname" ]; then

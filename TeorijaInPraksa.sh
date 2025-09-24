@@ -1,6 +1,7 @@
 #!/bin/bash
 
 dirname="Teorija in Praksa"
+scriptname=$(echo $dirname | tr -d ' ')
 url="https://www.dlib.si/results/?=&query=%27rele%253dTeorija%2bin%2bpraksa%27&fformattypeserial=journal&sortDir=ASC&sort=date&pageSize=100&page="
 
 if [ -d "$dirname" ]; then

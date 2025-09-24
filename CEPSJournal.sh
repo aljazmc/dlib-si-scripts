@@ -1,6 +1,7 @@
 #!/bin/bash
 
 dirname="CEPS Journal"
+scriptname=$(echo $dirname | tr -d ' ')
 url="https://www.dlib.si/results/?=&query=%27rele%253dCEPS%2bjournal%27&pageSize=100&fformattypeserial=journal&sortDir=ASC&sort=date"
 
 if [ -d "$dirname" ]; then
