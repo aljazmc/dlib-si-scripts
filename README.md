@@ -11,6 +11,7 @@ This repository contains scripts for downloading periodicals from the Digital Li
 
 ## > Requirements
 
+File 'cookies.txt' should be extracted from dlib.si and placed in the same directory with shell scripts.
 Following standard GNU/Linux utilities should be installed on the system:
 
 <table border="0">
