@@ -45,13 +45,15 @@ How to download magazine Analiza
 ## 1.) Clone the project with:
 git clone https://github.com/aljazmc/dlib-si-scripts
 
-## 2.) Move into the project with:
+## 2.) Extract cookies.txt with the browser plugin of your choice and save it in the same folder as Analiza.sh
+
+## 3.) Move into the project with:
 cd dlib-si-scripts
 
-## 3.) Make a script executable with:
+## 4.) Make a script executable with:
 chmod +x Analiza.sh
 
-## 4.) Afterwards run the script like this:
+## 5.) Afterwards run the script like this:
 ./Analiza.sh
 ```
 
