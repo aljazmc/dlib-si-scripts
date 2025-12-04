@@ -1,7 +1,7 @@
 #!/bin/bash
 
 dirname="Anthropos"
-scriptname=$(echo $dirname | tr -d ' ')
+scriptname=$(echo "$dirname" | tr -d ' ')
 url="https://www.dlib.si/results/?=&query=%27rele%253dAnthropos%2b(Ljubljana)%27&pageSize=100&fformattypeserial=journal&sortDir=ASC&sort=date&page="
 
 if [ ! -f "cookies.txt" ]; then

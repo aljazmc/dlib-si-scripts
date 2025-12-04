@@ -1,7 +1,7 @@
 #!/bin/bash
 
 dirname="Acta Medico Biotechnica"
-scriptname=$(echo $dirname | tr -d ' ')
+scriptname=$(echo "$dirname" | tr -d ' ')
 url="https://www.dlib.si/results/?=&query=%27rele%253dActa%2bmedico-biotechnica%27&sortDir=ASC&sort=date&pageSize=100&page="
 
 if [ ! -f "cookies.txt" ]; then

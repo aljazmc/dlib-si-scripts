@@ -1,7 +1,7 @@
 #!/bin/bash
 
 dirname="Uradni list Socialisticne Republike Slovenije"
-scriptname=$(echo $dirname | tr -d ' ')
+scriptname=$(echo "$dirname" | tr -d ' ')
 url="https://www.dlib.si/results/?=&query=%27rele%253dUradni%2blist%2bSocialisti%25c4%258dne%2bRepublike%2bSlovenije%27&pageSize=100&sortDir=ASC&sort=date&page="
 
 if [ ! -f "cookies.txt" ]; then

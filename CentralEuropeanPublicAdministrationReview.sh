@@ -1,7 +1,7 @@
 #!/bin/bash
 
 dirname="Central European Public Administration Review"
-scriptname=$(echo $dirname | tr -d ' ')
+scriptname=$(echo "$dirname" | tr -d ' ')
 url="https://www.dlib.si/results/?=&query=%27rele%253dCentral%2bEuropean%2bpublic%2badministration%2breview%27&pageSize=100&fformattypeserial=journal&sortDir=ASC&sort=date"
 
 if [ ! -f "cookies.txt" ]; then

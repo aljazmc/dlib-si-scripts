@@ -1,7 +1,7 @@
 #!/bin/bash
 
 dirname="Uprava"
-scriptname=$(echo $dirname | tr -d ' ')
+scriptname=$(echo "$dirname" | tr -d ' ')
 url="https://www.dlib.si/results/?=&query=%27rele%253dUprava%2b(Ljubljana)%27&pageSize=100&fformattypeserial=journal&sortDir=ASC&sort=date"
 
 if [ ! -f "cookies.txt" ]; then

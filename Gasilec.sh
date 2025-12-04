@@ -1,7 +1,7 @@
 #!/bin/bash
 
 dirname="Gasilec"
-scriptname=$(echo $dirname | tr -d ' ')
+scriptname=$(echo "$dirname" | tr -d ' ')
 url="https://www.dlib.si/results/?=&query=%27rele%253dGasilec%2b(1897-1941)%27&pageSize=100&sortDir=ASC&sort=date&page="
 
 if [ ! -f "cookies.txt" ]; then

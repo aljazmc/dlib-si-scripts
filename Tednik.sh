@@ -1,7 +1,7 @@
 #!/bin/bash
 
 dirname="Tednik"
-scriptname=$(echo $dirname | tr -d ' ')
+scriptname=$(echo "$dirname" | tr -d ' ')
 url="https://www.dlib.si/results/?=&query=%27rele%253dTednik%2b(Ptuj)%27&sortDir=ASC&sort=date&pageSize=100&page="
 
 if [ ! -f "cookies.txt" ]; then
