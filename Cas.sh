@@ -1,7 +1,7 @@
 #!/bin/bash
 
 dirname="Cas"
-scriptname=$(echo $dirname | tr -d ' ')
+scriptname=$(echo "$dirname" | tr -d ' ')
 url="https://www.dlib.si/results/?query=%27rele%253d%25c4%258cas%2b(Ljubljana)%27&pageSize=100&fformattypeserial=newspaper&sortDir=ASC&sort=date&frelation=%c4%8cas+(Ljubljana)&page="
 
 

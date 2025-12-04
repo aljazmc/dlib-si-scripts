@@ -1,7 +1,7 @@
 #!/bin/bash
 
 dirname="International Journal of Euro Mediterranean Studies"
-scriptname=$(echo $dirname | tr -d ' ')
+scriptname=$(echo "$dirname" | tr -d ' ')
 url="https://www.dlib.si/results/?=&query=%27rele%253dInternational%2bjournal%2bof%2bEuro-Mediterranean%2bstudies%27&fformattypeserial=journal&sortDir=ASC&sort=date&pageSize=100"
 
 if [ ! -f "cookies.txt" ]; then

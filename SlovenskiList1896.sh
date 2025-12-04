@@ -1,7 +1,7 @@
 #!/bin/bash
 
 dirname="Slovenski List 1896"
-scriptname=$(echo $dirname | tr -d ' ')
+scriptname=$(echo "$dirname" | tr -d ' ')
 url="https://www.dlib.si/results/?=&query=%27rele%253dSlovenski%2blist%2b(1896)%27&fformattypeserial=journal&sortDir=ASC&sort=date&pageSize=100&page="
 
 if [ ! -f "cookies.txt" ]; then

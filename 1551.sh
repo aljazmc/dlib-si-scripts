@@ -1,7 +1,7 @@
 #!/bin/bash
 
 dirname="1551"
-scriptname=$(echo $dirname | tr -d ' ')
+scriptname=$(echo "$dirname" | tr -d ' ')
 url="https://www.dlib.si/results/?=&query=%27rele%253d1551%27&sortDir=ASC&sort=date&pageSize=100"
 
 if [ ! -f "cookies.txt" ]; then

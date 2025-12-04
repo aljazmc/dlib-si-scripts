@@ -1,7 +1,7 @@
 #!/bin/bash
 
 dirname="Ars Mathematica Contemporanea"
-scriptname=$(echo $dirname | tr -d ' ')
+scriptname=$(echo "$dirname" | tr -d ' ')
 url="https://www.dlib.si/results/?=&query=%27rele%253dArs%2bmathematica%2bcontemporanea%27&pageSize=100&fformattypeserial=journal&sortDir=ASC&sort=date"
 
 if [ ! -f "cookies.txt" ]; then

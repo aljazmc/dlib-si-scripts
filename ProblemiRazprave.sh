@@ -1,7 +1,7 @@
 #!/bin/bash
 
 dirname="Problemi Razprave"
-scriptname=$(echo $dirname | tr -d ' ')
+scriptname=$(echo "$dirname" | tr -d ' ')
 url="https://www.dlib.si/results/?=&query=%27rele%253dProblemi.%2bRazprave%27&pageSize=100&sortDir=ASC&sort=date"
 
 if [ ! -f "cookies.txt" ]; then
