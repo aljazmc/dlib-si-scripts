@@ -12,12 +12,12 @@ fi
 mkdir -p "$dirname"
 cd "$dirname" || exit
 
-for i in {1..43}
+for i in {1..44}
 do
   wget --load-cookies ../cookies.txt -w 7 -O "$i" "$url""$i"
 done
 
-cat {1..43} > htmldump
+cat {1..44} > htmldump
 
 HTMLDUMP=$(cat htmldump)
 
