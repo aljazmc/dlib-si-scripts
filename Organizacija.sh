@@ -2,7 +2,7 @@
 
 dirname="Organizacija"
 scriptname=$(echo "$dirname" | tr -d ' ')
-url="https://www.dlib.si/results/?=&query=%27rele%253dOrganizacija%2b(Kranj)%27&pageSize=100&fformattypeserial=journal&sortDir=ASC&sort=date"
+url="https://www.dlib.si/results/?=&query=%27rele%253dOrganizacija%2b(Kranj)%27&pageSize=100&fformattypeserial=journal&sortDir=ASC&sort=date&page="
 
 if [ ! -f "cookies.txt" ]; then
   echo "Please extract the 'cookies.txt' from www.dlib.si with the appropriate plugin for your web browser. Save 'cookies.txt' in the same directory as $scriptname.sh"
@@ -12,14 +12,16 @@ fi
 mkdir -p "$dirname"
 cd "$dirname" || exit
 
-wget --load-cookies ../cookies.txt -w 7 -O htmldump "$url"
+wget --load-cookies ../cookies.txt -w 7 "$url"{1..2}
+
+cat index* > htmldump
 
 HTMLDUMP=$(cat htmldump)
 
 if [[ $HTMLDUMP == *"NAPAKA"* ]]; then
   echo "" \
   && echo "There were some problems with downloading files from dlib.si. Please, try again after a few moments." \
-  && rm htmldump \
+  && rm index* htmldump \
   && exit
 fi
 
