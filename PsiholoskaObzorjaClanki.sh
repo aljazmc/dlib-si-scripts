@@ -12,16 +12,19 @@ fi
 mkdir -p "$dirname"
 cd "$dirname" || exit
 
-wget --load-cookies ../cookies.txt -w 7 "$url"{1..9}
+for i in {1..10}
+do
+  wget --load-cookies ../cookies.txt -w 7 -O "$i" "$url""$i"
+done
 
-cat index* > htmldump
+cat {1..10} > htmldump
 
 HTMLDUMP=$(cat htmldump)
 
 if [[ $HTMLDUMP == *"NAPAKA"* ]]; then
   echo "" \
   && echo "There were some problems with downloading files from dlib.si. Please, try again after a few moments." \
-  && rm index* htmldump \
+  && rm htmldump \
   && exit
 fi
 
@@ -115,12 +118,6 @@ paste -d ' ' textfilenamer textslist >> textrunner
 
 find . -type f -exec grep -q 'DOCTYPE html' '{}' \; -delete;
 find . -type f -empty -delete
-
-################################# report ######################################
-
-echo "$(( PDFSEXPECTED-$(find PDF* -maxdepth 1 -name "PDF*"| wc -l) )) pdfs are missing."
-echo "$(( TEXTSEXPECTED-$(find TEXT* -maxdepth 1 -name "TEXT*"| wc -l) )) texts are missing."
-echo "If some files are missing, run the script again"
 
 ################################ cleanup ######################################
 
