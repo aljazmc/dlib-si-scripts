@@ -12,7 +12,7 @@ fi
 mkdir -p "$dirname"
 cd "$dirname" || exit
 
-wget --load-cookies ../cookies.txt -w 7 "$url"{1..8}
+wget --load-cookies ../cookies.txt -w 7 "$url"{1..9}
 
 cat index* > htmldump
 
