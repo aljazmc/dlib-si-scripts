@@ -2,7 +2,7 @@
 
 dirname="Varstvo Narave"
 scriptname=$(echo "$dirname" | tr -d ' ')
-url="https://www.dlib.si/results/?=&query=%27rele%253dVarstvo%2bnarave%27&pageSize=100&fformattypeserial=journal&sortDir=ASC&sort=date"
+url="https://www.dlib.si/results/?query=%27rele%253dVarstvo%2bnarave%27&pageSize=100&fformattypeserial=journal&sortDir=ASC&sort=date&frelation=Varstvo+narave"
 
 if [ ! -f "cookies.txt" ]; then
   echo "Please extract the 'cookies.txt' from www.dlib.si with the appropriate plugin for your web browser. Save 'cookies.txt' in the same directory as $scriptname.sh"
