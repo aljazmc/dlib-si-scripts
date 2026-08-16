@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dirname="Uradni vestnik Mestne obcine Ptuj"
+dirname="Uradni Vestnik Mestne obcine Ptuj"
 scriptname=$(echo "$dirname" | tr -d ' ')
 url="https://www.dlib.si/results/?=&query=%27rele%253dUradni%2bvestnik%2bMestne%2bob%25c4%258dine%2bPtuj%27&sortDir=ASC&sort=date&pageSize=100&page="
 
