@@ -1,4 +1,6 @@
 */*
 !tests/*.sh
+!.github/workflows/
+!.github/workflows/*.yml
 
 cookies.txt
