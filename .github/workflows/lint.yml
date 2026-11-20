@@ -14,4 +14,4 @@ jobs:
       - uses: actions/checkout@v5
       # shellcheck comes with the ubuntu-latest runner
       - run: shellcheck --version
-      - run: shellcheck *.sh tests/*.sh
+      - run: shellcheck *.sh lib/*.sh tests/*.sh

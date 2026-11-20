@@ -7,7 +7,7 @@ This repository contains scripts for downloading periodicals from the Digital Li
 ## > Features
 
 * **Automated Downloading:** Scripts automate the process of downloading periodicals, saving you time and effort.
-* **Multiple Formats:** `.pdf` and `.txt`.
+* **Multiple Formats:** `.pdf` and `.txt` (Novi Akordi: `.pdf` and Sibelius `.sib` scores).
 
 ## > Requirements
 
@@ -66,6 +66,43 @@ chmod +x Analiza.sh
 ```
 
 Command `./Analiza.sh` will create a target directory 'Analiza' for downloads, and after a short time (or a few days, if we are talking about long running periodicals with thousands of files) a complete collection of periodical (in both .pdf and .txt format) will be downloaded in the target directory.
+
+## > How it works
+
+Every periodical has a short script, such as `Analiza.sh`, that calls the
+shared body in `lib/dlib.sh`:
+
+```sh
+#!/bin/bash
+
+# shellcheck source=lib/dlib.sh
+source "$(dirname "$0")/lib/dlib.sh"
+
+download "Analiza" \
+  "https://www.dlib.si/results/?=&query=...&pageSize=100"
+```
+
+`download <folder> <search url> [pages] [second format]` downloads every
+issue the dlib.si search lists into `<folder>/`:
+
+- `pages`: for searches with more than one page of results, the number of
+  pages; the URL must then end with `page=`, and pages 1 to N are fetched.
+- `second format`: `TEXT` (the default) downloads `.txt` files next to the
+  PDFs, `SIBELIUS` downloads `.sib` scores instead.
+
+To add a periodical, copy a script, name it after the periodical and change
+the folder and the search URL.
+
+## > Tests
+
+```sh
+bash tests/test_cookies.sh
+```
+
+checks offline that every script stops and asks for `cookies.txt` before it
+creates a folder or downloads anything. GitHub Actions checks all scripts
+with [ShellCheck](https://www.shellcheck.net/) on every push and pull
+request.
 
 ## > List of magazines
 
