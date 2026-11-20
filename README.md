@@ -11,7 +11,7 @@ This repository contains scripts for downloading periodicals from the Digital Li
 
 ## > Requirements
 
-File 'cookies.txt' should be extracted from dlib.si and placed in the same directory with shell scripts.
+File 'cookies.txt' should be extracted from dlib.si and placed in the same directory with shell scripts (see [Manual cookies](#-manual-cookies)).
 Following standard GNU/Linux utilities should be installed on the system:
 
 <table border="0">
@@ -45,6 +45,70 @@ Following standard GNU/Linux utilities should be installed on the system:
     </tr>
 </table>
 
+## > Manual cookies
+
+The scripts download with `wget --load-cookies cookies.txt`, so they need the
+cookies of a browser session on dlib.si saved in the Netscape `cookies.txt`
+format. Without the file every script stops before it creates a folder or
+downloads anything.
+
+### With a browser extension (recommended)
+
+1. Install an extension that exports cookies in the Netscape format, for
+   example *cookies.txt* for Firefox or *Get cookies.txt LOCALLY* for
+   Chrome/Chromium.
+2. Open [https://www.dlib.si](https://www.dlib.si) and browse it for a moment
+   (open a search and an issue), so the site sets its cookies. If you have a
+   dlib.si account, log in first.
+3. While the dlib.si tab is open, click the extension and export the cookies
+   **for the current site only** (not all cookies of the browser).
+4. Save the file as `cookies.txt` in the root of this repository, next to the
+   `.sh` scripts.
+
+### By hand, from the browser's developer tools
+
+1. Open [https://www.dlib.si](https://www.dlib.si) and browse it for a moment.
+2. Press `F12`, open *Storage* (Firefox) or *Application* (Chrome/Chromium)
+   and select *Cookies* → `https://www.dlib.si`.
+3. Create `cookies.txt` in the root of this repository. The first line must
+   be:
+
+   ```
+   # Netscape HTTP Cookie File
+   ```
+
+   followed by one line per cookie with seven fields separated by **tabs**
+   (not spaces):
+
+   ```
+   domain	include-subdomains	path	https-only	expires	name	value
+   ```
+
+   - `domain`: the cookie's domain as shown, e.g. `www.dlib.si` or `.dlib.si`
+   - `include-subdomains`: `TRUE` if the domain starts with a dot, else `FALSE`
+   - `path`: usually `/`
+   - `https-only`: `TRUE` if the cookie is marked *Secure*, else `FALSE`
+   - `expires`: the expiry as a Unix timestamp in seconds, `0` for session
+     cookies
+   - `name` and `value`: copied from the developer tools
+
+   For example:
+
+   ```
+   # Netscape HTTP Cookie File
+   www.dlib.si	FALSE	/	TRUE	0	SomeCookieName	SomeCookieValue
+   ```
+
+### Check and refresh
+
+Run the scripts from the root of the repository (`./Analiza.sh`), since they
+look for `./cookies.txt` there. If downloads fail or come back as error pages,
+the cookies have most likely expired: export a fresh `cookies.txt` and run the
+script again.
+
+`cookies.txt` holds your session, so do not share it. It is listed in
+`.gitignore` and will not be committed.
+
 ## > Example
 
 How to download magazine Analiza
@@ -53,7 +117,7 @@ How to download magazine Analiza
 ## 1.) Clone the project with:
 git clone https://github.com/aljazmc/dlib-si-scripts
 
-## 2.) Extract cookies.txt with the browser plugin of your choice and save it in the same folder as Analiza.sh
+## 2.) Extract cookies.txt (see "Manual cookies" above) and save it in the same folder as Analiza.sh
 
 ## 3.) Move into the project with:
 cd dlib-si-scripts
