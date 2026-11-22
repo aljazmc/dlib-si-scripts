@@ -1,51 +1,55 @@
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-
 # dlib-si-scripts
 
-This repository contains scripts for downloading periodicals from the Digital Library of Slovenia (dlib.si)
+[![lint](https://github.com/aljazmc/dlib-si-scripts/actions/workflows/lint.yml/badge.svg)](https://github.com/aljazmc/dlib-si-scripts/actions/workflows/lint.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Bash](https://img.shields.io/badge/Bash-scripts-4eaa25?logo=gnubash&logoColor=white)](https://www.gnu.org/software/bash/)
+[![wget](https://img.shields.io/badge/wget-GNU-a42e2b?logo=gnu&logoColor=white)](https://www.gnu.org/software/wget/)
+[![Periodicals](https://img.shields.io/badge/periodicals-155-0a7bbb)](#list-of-periodicals)
+[![ShellCheck](https://img.shields.io/badge/ShellCheck-checked-4eaa25?logo=gnubash&logoColor=white)](https://www.shellcheck.net/)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-fe5196?logo=conventionalcommits&logoColor=white)](https://www.conventionalcommits.org/)
 
-## > Features
+Whole periodicals from the Digital Library of Slovenia ([dlib.si](https://www.dlib.si)),
+one command each. A short script per periodical downloads every issue the
+library lists, as PDF and plain text, into a folder named after it: 155
+periodicals of Slovenian history, science and culture, from *1551* to
+*Zgodovinski časopis*.
 
-* **Automated Downloading:** Scripts automate the process of downloading periodicals, saving you time and effort.
-* **Multiple Formats:** `.pdf` and `.txt` (Novi Akordi: `.pdf` and Sibelius `.sib` scores).
+## Features
 
-## > Requirements
+- **One command per periodical.** `./Analiza.sh` downloads the complete
+  collection of *Analiza*; long-running periodicals with thousands of files
+  take a few days, but need nothing more from you.
+- **PDF and text.** Every issue as `.pdf` and `.txt`; *Novi Akordi* as
+  `.pdf` and Sibelius `.sib` scores.
+- **155 periodicals**, from scientific journals to historical newspapers
+  such as *Slovenski Narod*, the largest with 232 pages of search results.
+- **One shared library.** Every script is a few lines over `lib/dlib.sh`, so
+  adding a periodical means copying a script and changing its folder and
+  search URL.
+- **Safe without cookies.** Without `cookies.txt`, every script stops before
+  it creates a folder or downloads anything.
 
-File 'cookies.txt' should be extracted from dlib.si and placed in the same directory with shell scripts (see [Manual cookies](#-manual-cookies)).
-Following standard GNU/Linux utilities should be installed on the system:
+## Quick start
 
-<table border="0">
-    <tr>
-        <td> - awk </td>
-        <td> - cat </td>
-        <td> - cd </td>
-    </tr>
-    <tr>
-        <td> - chmod </td>
-        <td> - comm </td>
-        <td> - echo </td>
-    </tr>
-    <tr>
-        <td> - find </td>
-        <td> - grep </td>
-        <td> - mkdir </td>
-    </tr>
-    <tr>
-        <td> - paste </td>
-        <td> - rm </td>
-        <td> - sed </td>
-    </tr>
-    <tr>
-        <td> - sort </td>
-        <td> - tr </td>
-        <td> - wc </td>
-    </tr>
-    <tr>
-        <td> - wget </td>
-    </tr>
-</table>
+```sh
+git clone https://github.com/aljazmc/dlib-si-scripts.git
+cd dlib-si-scripts
+# save cookies.txt here first, see Manual cookies below
+./Analiza.sh
+```
 
-## > Manual cookies
+`./Analiza.sh` creates the folder `Analiza` and downloads the whole
+collection of the periodical into it, in both `.pdf` and `.txt` format.
+
+## Requirements
+
+| Requirement | Notes |
+| --- | --- |
+| `cookies.txt` | the cookies of a browser session on dlib.si, in the root of the repository (see [Manual cookies](#manual-cookies)) |
+| Bash and GNU tools | `awk`, `cat`, `chmod`, `comm`, `find`, `grep`, `mkdir`, `paste`, `rm`, `sed`, `sort`, `tr`, `wc` |
+| wget | downloads the issues with the session's cookies |
+
+## Manual cookies
 
 The scripts download with `wget --load-cookies cookies.txt`, so they need the
 cookies of a browser session on dlib.si saved in the Netscape `cookies.txt`
@@ -109,29 +113,7 @@ script again.
 `cookies.txt` holds your session, so do not share it. It is listed in
 `.gitignore` and will not be committed.
 
-## > Example
-
-How to download magazine Analiza
-
-```
-## 1.) Clone the project with:
-git clone https://github.com/aljazmc/dlib-si-scripts
-
-## 2.) Extract cookies.txt (see "Manual cookies" above) and save it in the same folder as Analiza.sh
-
-## 3.) Move into the project with:
-cd dlib-si-scripts
-
-## 4.) Make a script executable with:
-chmod +x Analiza.sh
-
-## 5.) Afterwards run the script like this:
-./Analiza.sh
-```
-
-Command `./Analiza.sh` will create a target directory 'Analiza' for downloads, and after a short time (or a few days, if we are talking about long running periodicals with thousands of files) a complete collection of periodical (in both .pdf and .txt format) will be downloaded in the target directory.
-
-## > How it works
+## How it works
 
 Every periodical has a short script, such as `Analiza.sh`, that calls the
 shared body in `lib/dlib.sh`:
@@ -157,17 +139,29 @@ issue the dlib.si search lists into `<folder>/`:
 To add a periodical, copy a script, name it after the periodical and change
 the folder and the search URL.
 
-## > Tests
+## Tests
 
 ```sh
 bash tests/test_cookies.sh
 ```
 
 checks offline that every script stops and asks for `cookies.txt` before it
-creates a folder or downloads anything. GitHub Actions checks all scripts
-with [ShellCheck](https://www.shellcheck.net/) on every push and pull
-request.
+creates a folder or downloads anything: `wget` and `curl` are replaced by
+stand-ins that record any call. GitHub Actions checks all scripts with
+[ShellCheck](https://www.shellcheck.net/) on every push and pull request, see
+[.github/workflows/lint.yml](.github/workflows/lint.yml).
 
-## > List of magazines
+## List of periodicals
 
-1551, Academica Turistica, Acrocephalus, Acta Agriculturae Slovenica, Acta Biologica Slovenica, Acta Carsologica, Acta Chimica Slovenica, Acta Ecclesiastica Sloveniae, Acta Geographica Slovenica, Acta Geotechnica Slovenica, Acta Histriae, Acta Hydrotechnica, Acta Medico Biotechnica, Advances in Production Engineering and Management, Akademija MM, Akademski Glas, Analiza, Andragoska Spoznanja, Angeljcek, Annales Series Historia et Sociologia, Annales Series Historia Naturalis, Anthropos, Arheoloski Vestnik, Arhitektov Bilten, Arhivi, Ars et Humanitas, Ars Mathematica Contemporanea, Asian Studies, Avtonomist, Blejske Delavnice iz Fizike, Bojevnik, Casopis za Kritiko Znanosti, Casopis za Zgodovino in Narodopisje, Cas, Central European Public Administration Review, CEPS Journal, Communio, Delavec, Delavske Novice, Delo 1928, Delo in Varnost, Delovni Zvezki Zavod za Makroekonomske Analize in Razvoj, Delo Zivljenje, De Musica Disserenda, Development Report, Didakta, Dignitas, Dileme, Dogovori Clanki, Domoljub, Druzboslovne Razprave, Drzavni Zakonik za Kraljevine in Dezele v Drzavnem Zboru Zastopane, Dynamic Relationships Management Journal, Economic and Business Review, Economic Issues, Edinost in Dialog, Ekonomija Plus, Ekonomski Izzivi, Ekonomsko Ogledalo, Elektrotehniski Vestnik Clanki, Evgenika, Farmacevtski Vestnik, Farmakon, Filozofski Vestnik, Fizika v Soli, Folia Biologica et Geologica, Gasilec, Geodetski Vestnik, Geografija v Soli, Geografski Obzornik, Geografski Vestnik, Geologija, Glasbena Mladina, Glasilo Drustva Ekonomistov Maribor, Glas Podzemlja, Glas, Glej Netopir, Gospodar in Gospodinja, Gospodar, Gospodarska Gibanja, Gostilnicar, Gozdarski Vestnik, Gradbeni Vestnik, IB Revija, Igra Ustvarjalnosti, Informatica Medica Slovenica, Informatica, International Journal of Euro Mediterranean Studies, Izzivi Managementu, Izzivi Prihodnosti, Javna Uprava, Jezikoslovni Zapiski, Jutro, Kakovostna Starost, Kinesiologia Slovenica, Klik, Kmetijske in Rokodelske Novice, Kronika, LIFE NarcIS, Linguistica, Literatura, Lovec, Management, Managing Global Transitions, Marburger Zeitung, Matematika v Soli, Mednarodna Revija za Javno Upravo, Natura Sloveniae, Novi Akordi, Novi Cas, Obzornik za Matematiko in Fiziko, Obzornik Zdravstvene Nege, Organizacija, Pettauer Zeitung, Planinski Vestnik, Problemi Eseji, Problemi Literatura, Problemi Razprave, Problemi, Psiholoska Obzorja Clanki, Psiholoska Obzorja, Ptujcan, Revija za Univerzalno Odlicnost, Slavisticna Revija, Slovenec, Slovenski List 1896, Slovenski List 1937, Slovenski Narod, Slovenski Tednik, Socialist, Socialno Delo Mix, Sodobnost 1933, Sodobnost 1963, Strojniski Vestnik, Studia Mythologica Slavica, Tednik, Teorija in Praksa, Tim, Uporabna Informatika, Uprava, Uradni List Ljudske Republike Slovenije, Uradni List Socialisticne Republike Slovenije, Uradni Vestnik Mestne obcine Ptuj, Uradno Glasilo Slovenskih Obcin, Varstvo Narave, Ventil, Vestnik Instituta za Marksisticne Studije, Zbornik za Umetnostno Zgodovino, Zdravniski Vestnik, Zdravstveno Varstvo, Zgodovina v Soli, Zgodovina za Vse, Zgodovinski Casopis, Zgodovinski Zapisi
+<details>
+<summary>155 periodicals</summary>
+
+1551, Academica Turistica, Acrocephalus, Acta Agriculturae Slovenica, Acta Biologica Slovenica, Acta Carsologica, Acta Chimica Slovenica, Acta Ecclesiastica Sloveniae, Acta Geographica Slovenica, Acta Geotechnica Slovenica, Acta Histriae, Acta Hydrotechnica, Acta Medico Biotechnica, Advances in Business Related Scientific Research Journal, Advances in Production Engineering and Management, Akademija MM, Akademski Glas, Analiza, Andragoska Spoznanja, Angeljcek, Annales Series Historia et Sociologia, Annales Series Historia Naturalis, Anthropos, Arheoloski Vestnik, Arhitektov Bilten, Arhivi, Ars et Humanitas, Ars Mathematica Contemporanea, Asian Studies, Avtonomist, Blejske Delavnice iz Fizike, Bojevnik, Casopis za Kritiko Znanosti, Casopis za Zgodovino in Narodopisje, Cas, Central European Public Administration Review, CEPS Journal, Communio, Delavec, Delavske Novice, Delo 1928, Delo in Varnost, Delovni Zvezki Zavod za Makroekonomske Analize in Razvoj, Delo Zivljenje, De Musica Disserenda, Development Report, Didakta, Dignitas, Dileme, Dogovori Clanki, Domoljub, Druzboslovne Razprave, Drzavni Zakonik za Kraljevine in Dezele v Drzavnem Zboru Zastopane, Dynamic Relationships Management Journal, Economic and Business Review, Economic Issues, Edinost in Dialog, Ekonomija Plus, Ekonomski Izzivi, Ekonomsko Ogledalo, Elektrotehniski Vestnik Clanki, Evgenika, Farmacevtski Vestnik, Farmakon, Filozofski Vestnik, Fizika v Soli, Folia Biologica et Geologica, Gasilec, Geodetski Vestnik, Geografija v Soli, Geografski Obzornik, Geografski Vestnik, Geologija, Glasbena Mladina, Glasilo Drustva Ekonomistov Maribor, Glas Podzemlja, Glas, Glej Netopir, Gospodar in Gospodinja, Gospodar, Gospodarska Gibanja, Gostilnicar, Gozdarski Vestnik, Gradbeni Vestnik, IB Revija, Igra Ustvarjalnosti, Informatica Medica Slovenica, Informatica, International Journal of Euro Mediterranean Studies, Izzivi Managementu, Izzivi Prihodnosti, Javna Uprava, Jezikoslovni Zapiski, Jutro, Kakovostna Starost, Kinesiologia Slovenica, Klik, Kmetijske in Rokodelske Novice, Kronika, LIFE NarcIS, Linguistica, Literatura, Lovec, Management, Managing Global Transitions, Marburger Zeitung, Matematika v Soli, Mednarodna Revija za Javno Upravo, Natura Sloveniae, Novi Akordi, Novi Cas, Obzornik za Matematiko in Fiziko, Obzornik Zdravstvene Nege, Organizacija, Pettauer Zeitung, Planinski Vestnik, Problemi Eseji, Problemi Literatura, Problemi Razprave, Problemi, Psiholoska Obzorja Clanki, Psiholoska Obzorja, Ptujcan, Revija za Univerzalno Odlicnost, Slavisticna Revija, Slovenec, Slovenski List 1896, Slovenski List 1937, Slovenski Narod, Slovenski Tednik, Socialist, Socialno Delo Mix, Sodobnost 1933, Sodobnost 1963, Strojniski Vestnik, Studia Mythologica Slavica, Tednik, Teorija in Praksa, Tim, Uporabna Informatika, Uprava, Uradni List Ljudske Republike Slovenije, Uradni List Socialisticne Republike Slovenije, Uradni Vestnik Mestne obcine Ptuj, Uradno Glasilo Slovenskih Obcin, Varstvo Narave, Ventil, Vestnik Instituta za Marksisticne Studije, Zbornik za Umetnostno Zgodovino, Zdravniski Vestnik, Zdravstveno Varstvo, Zgodovina v Soli, Zgodovina za Vse, Zgodovinski Casopis, Zgodovinski Zapisi
+
+</details>
+
+## License
+
+The scripts are licensed under the [MIT License](LICENSE). The periodicals you
+download are not covered by it; the terms of dlib.si and of their publishers
+apply to them.
