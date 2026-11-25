@@ -1,6 +1,6 @@
 # dlib-si-scripts
 
-[![lint](https://github.com/aljazmc/dlib-si-scripts/actions/workflows/lint.yml/badge.svg)](https://github.com/aljazmc/dlib-si-scripts/actions/workflows/lint.yml)
+[![CI](https://github.com/aljazmc/dlib-si-scripts/actions/workflows/ci.yml/badge.svg)](https://github.com/aljazmc/dlib-si-scripts/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Bash](https://img.shields.io/badge/Bash-scripts-4eaa25?logo=gnubash&logoColor=white)](https://www.gnu.org/software/bash/)
 [![wget](https://img.shields.io/badge/wget-GNU-a42e2b?logo=gnu&logoColor=white)](https://www.gnu.org/software/wget/)
